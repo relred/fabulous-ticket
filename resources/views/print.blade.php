@@ -30,6 +30,11 @@
                 <div class="scale-100 flex my-6">
                     <div>
                         <b>Folio: {{ $sale->id }}</b>
+                            @if ($sale->card_voucher)
+                            <p>
+                                <b class="text-sm">Voucher: {{ strtoupper($sale->card_voucher) }}</b>
+                            </p>
+                            @endif
                         <p>Cajero: {{ $sale->user_fullname }}</p>
                         <p>Número de Caja: {{ $sale->stall }}</p>
 

@@ -46,7 +46,7 @@ Route::post('/scanner/{id}', [ScannerController::class, 'scan'])->name('scanner'
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('role:cashier', 'cashier.session');
-Route::get('/birthday', [CashiersController::class, 'birthdayView'])->name('birthday')->middleware('role:cashier');
+Route::get('/birthday', [CashiersController::class, 'birthdayView'])->name('birthday')->middleware('role:cashier', 'cashier.session');
 Route::post('/birthday', [CashiersController::class, 'birthdayStore'])->name('birthday.store')->middleware('role:cashier');
 
 Route::get('/history', [CashiersController::class, 'history'])->name('history')->middleware('role:cashier', 'cashier.session');
