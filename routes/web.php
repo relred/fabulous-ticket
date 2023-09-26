@@ -9,6 +9,7 @@ use App\Http\Controllers\SupervisorsController;
 use App\Http\Controllers\CashiersController;
 use App\Http\Controllers\WithdrawsController;
 use App\Http\Controllers\ScannerController;
+use App\Http\Controllers\SessionsController;
 use App\Models\Withdraw;
 
 /*
@@ -76,9 +77,12 @@ Route::get('/print/{id}', [SalesController::class, 'print'])->name('print');
 // ADMINISTRADOR
 Route::get('/admin', [AdminsController::class, 'index'])->name('admin.users')->middleware('role:admin');
 Route::get('/admin/monitoring', [AdminsController::class, 'monitoring'])->name('admin.monitoring')->middleware('role:admin');
-Route::get('/admin/session/regenerate', [AdminsController::class, 'session'])->name('admin.session.open')->middleware('role:admin');
 Route::get('/admin/add-user', [AdminsController::class, 'addUserView'])->name('admin.adduser')->middleware('role:admin');
 Route::post('/admin/add-user', [AdminsController::class, 'addUserStore'])->name('admin.adduser.store')->middleware('role:admin');
+
+Route::get('/admin/session', [AdminsController::class, 'sessionView'])->name('admin.session.controls')->middleware('role:admin');
+Route::get('/admin/session/control', [SessionsController::class, 'close'])->name('admin.session.close')->middleware('role:admin');
+Route::post('/admin/session/control', [SessionsController::class, 'store'])->name('admin.session.store')->middleware('role:admin');
 
 // SUPERVISOR
 Route::get('/supervisor', [SupervisorsController::class, 'index'])->name('supervisor.users')->middleware('role:supervisor');

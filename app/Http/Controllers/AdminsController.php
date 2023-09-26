@@ -56,8 +56,6 @@ class AdminsController extends Controller
         }
     }
 
-
-
     public function monitoring()
     {
         $sales = Sale::where('session', Configuration::all()->first()->current_session)->take(100)->get();
@@ -67,11 +65,22 @@ class AdminsController extends Controller
         $sessionSalesTotal = Sale::where('session', Configuration::all()->first()->current_session)->pluck('amount')->sum();
         $sessionSalesCount = Sale::where('session', Configuration::all()->first()->current_session)->count();
 
+        $sessionGenderMale = Sale::where('session', Configuration::all()->first()->current_session)->pluck('gender_male')->sum();
+        $sessionGenderFemale = Sale::where('session', Configuration::all()->first()->current_session)->pluck('gender_female')->sum();
+        $totalGenderMale = Sale::pluck('gender_male')->sum();
+        $totalGenderFemale = Sale::pluck('gender_female')->sum();
 
-        return view('admin.monitoring', ['sales' => $sales, 'salesCount' => $salesCount, 'salesTotal' => $salesTotal, 'sessionSalesTotal' => $sessionSalesTotal, 'sessionSalesCount' => $sessionSalesCount]);
+        return view('admin.monitoring', ['sales' => $sales, 'salesCount' => $salesCount, 'salesTotal' => $salesTotal, 'sessionSalesTotal' => $sessionSalesTotal, 'sessionSalesCount' => $sessionSalesCount, 'sessionGenderMale' => $sessionGenderMale, 'sessionGenderFemale' => $sessionGenderFemale, 'totalGenderMale' => $totalGenderMale, 'totalGenderFemale' => $totalGenderFemale]);
     }
 
-    public function session()
+    public function sessionView()
+    {
+        $configuration = Configuration::all()->first();
+
+        return view('admin.session-controls', ['configuration' => $configuration]);
+    }
+
+    public function sessionRegenerate()
     {
         $configuration = Configuration::all()->first();
         $configuration->current_session = uniqid();
