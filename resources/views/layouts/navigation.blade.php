@@ -19,6 +19,9 @@
                         <x-nav-link :href="route('admin.monitoring')" :active="request()->routeIs('admin.monitoring')">
                             {{ __('Analitica') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.session.index')" :active="request()->routeIs('admin.session.index')">
+                            {{ __('Historial de ventas') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('admin.session.controls')" :active="request()->routeIs('admin.session.controls')">
                             {{ __('Control de sesión') }}
                         </x-nav-link>

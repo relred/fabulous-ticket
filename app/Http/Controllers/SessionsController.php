@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Configuration;
 use App\Models\User;
+use App\Models\Sale;
 use App\Models\Session;
 
 class SessionsController extends Controller
@@ -38,6 +39,13 @@ class SessionsController extends Controller
         }
 
         return redirect()->route('admin.session.controls')->with('users', $users);
+    }
+
+    public function history($session)
+    {
+        $sales = Sale::where('session', $session)->orderByDesc('id')->get();
+
+        return view('admin.history', ['sales' => $sales]);
     }
 
 }

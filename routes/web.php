@@ -80,6 +80,9 @@ Route::get('/admin/monitoring', [AdminsController::class, 'monitoring'])->name('
 Route::get('/admin/add-user', [AdminsController::class, 'addUserView'])->name('admin.adduser')->middleware('role:admin');
 Route::post('/admin/add-user', [AdminsController::class, 'addUserStore'])->name('admin.adduser.store')->middleware('role:admin');
 
+Route::get('/admin/history', [AdminsController::class, 'sessionHistory'])->name('admin.session.index')->middleware('role:admin');
+Route::get('/admin/history/{session}', [SessionsController::class, 'history'])->name('admin.session.history')->middleware('role:admin');
+
 Route::get('/admin/session', [AdminsController::class, 'sessionView'])->name('admin.session.controls')->middleware('role:admin');
 Route::get('/admin/session/control', [SessionsController::class, 'close'])->name('admin.session.close')->middleware('role:admin');
 Route::post('/admin/session/control', [SessionsController::class, 'store'])->name('admin.session.store')->middleware('role:admin');

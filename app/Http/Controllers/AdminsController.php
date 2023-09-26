@@ -6,6 +6,7 @@ use App\Models\Configuration;
 use Illuminate\Http\Request;
 use App\Models\Sale;
 use App\Models\User;
+use App\Models\Session;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -87,6 +88,12 @@ class AdminsController extends Controller
         $configuration->save();
 
         return redirect()->route('admin.monitoring')->with('success', 'Sesíon creada con éxito');
+    }
+
+    public function sessionHistory()
+    {
+        $sessions = Session::orderByDesc('id')->get();
+        return view('admin.sessions', ['sessions' => $sessions]);
     }
 
 }

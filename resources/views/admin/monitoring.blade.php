@@ -164,6 +164,9 @@
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Cajero</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Descripción</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
