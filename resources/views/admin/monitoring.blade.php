@@ -160,7 +160,7 @@
     <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center mt-6">Ultimas 100 ventas</h2>
     <div class="w-1/2 p-6 mt-4 mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
         <div class="overflow-x-auto">
-            <table class="table-auto w-3/4 mx-auto">
+            <table class="table-auto mx-auto">
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="p-2 whitespace-nowrap">

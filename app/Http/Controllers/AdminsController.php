@@ -59,7 +59,7 @@ class AdminsController extends Controller
 
     public function monitoring()
     {
-        $sales = Sale::where('session', Configuration::all()->first()->current_session)->take(100)->get();
+        $sales = Sale::where('session', Configuration::all()->first()->current_session)->orderByDesc('id')->take(100)->get();
         $salesCount = Sale::all()->count();
 
         $salesTotal = Sale::pluck('amount')->sum();
