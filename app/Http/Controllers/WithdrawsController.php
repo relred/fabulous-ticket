@@ -23,7 +23,7 @@ class WithdrawsController extends Controller
         $dollarTotal = Sale::where('user_id', auth()->user()->id)->where('session', auth()->user()->session)->pluck('amount_dollar')->sum();
         $withdrawnDollar = Withdraw::where('user_id', auth()->user()->username)->where('session', auth()->user()->session)->where('type', 'dollar')->get()->pluck('amount')->sum();
 
-        $dollarConvertedTotal = $dollarTotal * 17.5;
+        $dollarConvertedTotal = $dollarTotal * 16;
         $cardTotal = $salesraw->pluck('amount_card')->sum();
         $cashInRegister = $salesTotal - $cardTotal - $dollarConvertedTotal - $withdrawnCash;
         $dollarInRegister = $dollarTotal - $withdrawnDollar;
@@ -111,7 +111,7 @@ class WithdrawsController extends Controller
         $dollarTotal = Sale::where('user_id', auth()->user()->id)->where('session', auth()->user()->session)->pluck('amount_dollar')->sum();
         $withdrawnDollar = Withdraw::where('user_id', auth()->user()->username)->where('session', auth()->user()->session)->where('type', 'dollar')->get()->pluck('amount')->sum();
 
-        $dollarConvertedTotal = $dollarTotal * 17.5;
+        $dollarConvertedTotal = $dollarTotal * 16;
         $cardTotal = $salesraw->pluck('amount_card')->sum();
         $cashTotal = $salesTotal - $cardTotal - $dollarConvertedTotal;
 
@@ -164,7 +164,7 @@ class WithdrawsController extends Controller
         $totalCard = $salesraw->pluck('amount_card')->sum();
         $totalDollar = Sale::where('user_id', auth()->user()->id)->where('session', $withdraw->session)->pluck('amount_dollar')->sum();
 
-        $dollarConvertedTotal = $totalDollar * 17.5;
+        $dollarConvertedTotal = $totalDollar * 16;
 
         $totalCash = $totalSale - $totalCard - $dollarConvertedTotal;
 

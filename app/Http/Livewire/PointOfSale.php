@@ -56,18 +56,18 @@ class PointOfSale extends Component
         $this->genderTotal = (int)$this->genderMale + (int)$this->genderFemale;
 
         $this->adultTotal = (int)$this->adult * 50;
-        $this->kidTotal = (int)$this->kid * 25;
-        $this->seniorTotal = (int)$this->senior * 25;
-        $this->disabledTotal = (int)$this->disabled * 25;
+        $this->kidTotal = (int)$this->kid * 0;
+        $this->seniorTotal = (int)$this->senior * 0;
+        $this->disabledTotal = (int)$this->disabled * 0;
 
-        $this->dollarConverted = (int)$this->dollar * 17.5;
+        $this->dollarConverted = (int)$this->dollar * 16;
 
         $this->paymentTotal = (float)$this->cash + (float)$this->card + (float)$this->dollarConverted;
         $this->total = $this->adultTotal + $this->kidTotal + $this->seniorTotal + $this->disabledTotal;
 
         $this->totalRemaining = $this->total - $this->paymentTotal;
-        $this->totalDollar = $this->total/17.5;
-        $this->totalDollarRemaining = $this->totalRemaining/17.5;
+        $this->totalDollar = $this->total/16;
+        $this->totalDollarRemaining = $this->totalRemaining/16;
 
         return view('livewire.point-of-sale');
     }

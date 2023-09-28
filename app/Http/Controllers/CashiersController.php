@@ -138,7 +138,7 @@ class CashiersController extends Controller
 
         $cardTotal = $salesraw->pluck('amount_card')->sum();
         $dollarTotal = $salesraw->pluck('amount_dollar')->sum();
-        $dollarConvertedTotal = $dollarTotal * 17.5;
+        $dollarConvertedTotal = $dollarTotal * 16;
         
         $cashInRegister = $salesTotal - $cardTotal - $dollarConvertedTotal - $withdrawnCash;
         $dollarTotal = $salesraw->pluck('amount_dollar')->sum();
@@ -173,7 +173,7 @@ class CashiersController extends Controller
 
         $cardTotal = $salesraw->pluck('amount_card')->sum();
         $dollarTotal = $salesraw->pluck('amount_dollar')->sum();
-        $dollarConvertedTotal = $dollarTotal * 17.5;
+        $dollarConvertedTotal = $dollarTotal * 16;
         $withdrawnCash = Withdraw::where('user_id', auth()->user()->username)->where('session', auth()->user()->session)->where('type', 'cash')->get()->pluck('amount')->sum();
 
 

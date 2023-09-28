@@ -108,6 +108,9 @@
                                                     Cumpleañero
                                                 </p>
                                             @endif
+                                            <p class="text-center">Comprado:
+                                                <b>{{ $sale->created_at->diffForHumans() }}</b>
+                                            </p>
                                     </div>
                         
                                 </div>

@@ -35,9 +35,9 @@
                                 <a href="{{ route('admin.session.history', $session->session) }}" class="hover:shadow-form hover:bg-teal-600 rounded-md bg-teal-500 py-2 px-3 text-sm font-semibold text-white outline-none">
                                     Ver historial de sesión
                                 </a>
-                                <a href="#" class="hover:shadow-form hover:bg-gray-400 rounded-md bg-gray-700 py-2 px-3 text-sm font-semibold text-white outline-none ml-2">
+{{--                                 <a href="#" class="hover:shadow-form hover:bg-gray-400 rounded-md bg-gray-700 py-2 px-3 text-sm font-semibold text-white outline-none ml-2">
                                     Imprimir reporte
-                                </a>
+                                </a> --}}
                             </div>
                             <br>
                         </td>
