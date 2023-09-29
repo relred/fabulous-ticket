@@ -136,7 +136,7 @@
                                 <form action="ret" method="POST">
                                     @csrf
                                     <div class="grid gap-3 grid-cols-2">
-                                        <p for="id" class="ml-12 mt-3 text-lg font-medium text-[#07074D]">QR</p>
+                                        <p for="id" class="ml-12 mt-3 text-lg font-medium text-[#07074D]">Folio</p>
                                         <input name="id" type="text" id="id" class="appearance-none uppercase rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" required autofocus>
                                     </div>
                                     <div class="grid grid-cols-1">

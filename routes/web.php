@@ -44,6 +44,10 @@ Route::get('/', function () {
 Route::get('/scanner/{id}', [ScannerController::class, 'view'])->name('scanner');
 Route::post('/scanner/{id}', [ScannerController::class, 'scan'])->name('scanner');
 
+Route::get('/emergency-scanner/{id}', [ScannerController::class, 'viewEmergency'])->name('scanner.emergency');
+Route::post('/emergency-scanner/{id}', [ScannerController::class, 'scanEmergency'])->name('scanner.emergency');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('role:cashier', 'cashier.session');
