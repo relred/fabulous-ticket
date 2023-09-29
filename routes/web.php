@@ -95,6 +95,11 @@ Route::get('/supervisor/add-user', [SupervisorsController::class, 'addUserView']
 Route::post('/supervisor/add-user', [SupervisorsController::class, 'addUserStore'])->name('supervisor.adduser.store')->middleware('role:supervisor');
 
 Route::get('/supervisor/find-ticket', [SupervisorsController::class, 'findTicket'])->name('supervisor.find')->middleware('role:supervisor');
+Route::post('/supervisor/find-ticket', [SupervisorsController::class, 'findTicketPost'])->name('supervisor.find.post')->middleware('role:supervisor');
+Route::get('/supervisor/find-ticket/{id}', [SupervisorsController::class, 'viewTicket'])->name('supervisor.find.view')->middleware('role:supervisor');
+Route::get('/supervisor/cancel-ticket/{id}', [SupervisorsController::class, 'cancelSale'])->name('supervisor.find.cancel')->middleware('role:supervisor');
+
+Route::get('/supervisor/cancel-ticket-print/{id}', [SupervisorsController::class, 'cancelSalePrint'])->name('supervisor.find.cancel.print')->middleware('role:supervisor');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

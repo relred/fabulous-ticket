@@ -27,6 +27,15 @@
                         </x-nav-link>
                     @endif
 
+                    @if (auth()->user()->role == 'supervisor')
+                        <x-nav-link :href="route('supervisor.users')" :active="request()->routeIs('supervisor.users')">
+                            {{ __('Crear Cajeros') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('supervisor.find')" :active="request()->routeIs('supervisor.find')">
+                            {{ __('Buscar Tickets') }}
+                        </x-nav-link>
+                    @endif
+
                     @if (auth()->user()->role == 'cashier')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Punto de Venta') }}
