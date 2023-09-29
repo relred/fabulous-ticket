@@ -99,6 +99,10 @@
                                         {{ ($sale->senior)? $sale->senior . ' Adultos Mayores ':'' }}
                                         {{ ($sale->disabled)? '| ' . $sale->disabled . ' Capacidades Diferentes':'' }}
                                         {{ ($sale->birthday)?'Cumpleañero':'' }}
+                                        @if (!$sale->adult && !$sale->kid && !$sale->senior && !$sale->disabled && $sale->dollar_change)
+                                            {{ $sale->dollar_change }} Boletos VIP
+                                        @endif
+        
                                     </div>
                                 </div>
                             </td>

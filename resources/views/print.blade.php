@@ -63,8 +63,17 @@
                                 </p>
                             @endif
                             
+                            @if (!$sale->adult && !$sale->kid && !$sale->senior && !$sale->disabled)
+                                Boleto VIP
+                            @endif
+                            
                         </div>
                     </div>
+                    @if (!$sale->adult && !$sale->kid && !$sale->senior && !$sale->disabled && !$sale->birthday)
+                        <p class="my-6 text-gray-500 text-center text-2xl font-bold leading-relaxed">
+                            {{ $sale->dollar_change }} Entradas VIP
+                        </p>
+                    @endif
                     @if ($sale->birthday)
                         <p class="my-6 text-gray-500 text-center text-2xl font-bold leading-relaxed">
                             Cumpleañero

@@ -45,6 +45,11 @@ class CashiersController extends Controller
         return redirect()->route('print', $cluster_id);
     }
 
+    public function vipView()
+    {
+        return view('vip');
+    }
+
     public function history()
     {
         $salesraw = Sale::where('user_id', auth()->user()->id)->where('session', auth()->user()->session);

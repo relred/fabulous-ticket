@@ -34,6 +34,9 @@
                         <x-nav-link :href="route('birthday')" :active="request()->routeIs('birthday')">
                             {{ __('Cumpleañero') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('vip')" :active="request()->routeIs('vip')">
+                            {{ __('Boleto VIP') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('history')" :active="request()->routeIs('history')">
                             {{ __('Historial') }}
                         </x-nav-link>

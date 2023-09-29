@@ -50,6 +50,8 @@ Route::get('/dashboard', function () {
 Route::get('/birthday', [CashiersController::class, 'birthdayView'])->name('birthday')->middleware('role:cashier', 'cashier.session');
 Route::post('/birthday', [CashiersController::class, 'birthdayStore'])->name('birthday.store')->middleware('role:cashier');
 
+Route::get('/vip', [CashiersController::class, 'vipView'])->name('vip')->middleware('role:cashier', 'cashier.session');
+
 Route::get('/history', [CashiersController::class, 'history'])->name('history')->middleware('role:cashier', 'cashier.session');
 Route::get('/validate', [CashiersController::class, 'validateCashier'])->name('validate')->middleware('role:cashier');
 Route::post('/validate', [CashiersController::class, 'generateSession'])->name('session.generate')->middleware('role:cashier');
@@ -92,6 +94,7 @@ Route::get('/supervisor', [SupervisorsController::class, 'index'])->name('superv
 Route::get('/supervisor/add-user', [SupervisorsController::class, 'addUserView'])->name('supervisor.adduser')->middleware('role:supervisor');
 Route::post('/supervisor/add-user', [SupervisorsController::class, 'addUserStore'])->name('supervisor.adduser.store')->middleware('role:supervisor');
 
+Route::get('/supervisor/find-ticket', [SupervisorsController::class, 'findTicket'])->name('supervisor.find')->middleware('role:supervisor');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
