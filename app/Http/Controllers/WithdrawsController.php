@@ -53,7 +53,7 @@ class WithdrawsController extends Controller
         }
 
         if ($request->type == 'audit') {
-            $amount = $request->one_thousand * 1000 + $request->five_hundred * 500 + $request->two_hundred * 200 + $request->one_hundred *100 + $request->fifty * 50 + $request->twenty * 20 + $request->ten * 10 + $request->five * 5 + $request->two * 2 + $request->one + $request->cents/2;
+            $amount = $request->one_thousand * 1000 + $request->five_hundred * 500 + $request->two_hundred * 200 + $request->one_hundred *100 + $request->fifty * 50 + $request->twenty * 20 + $request->ten * 10 + $request->five * 5 + $request->two * 2 + $request->one + $request->cents;
 
             $withdraw = Withdraw::create([
                 'session' => Configuration::first()->current_session,
@@ -66,8 +66,30 @@ class WithdrawsController extends Controller
                 'dollars' => $request->dollar,
                 'cash_in_register' => $cashInRegister,
                 'dollars_in_register' => $dollarInRegister,
+                'one_thousand_bills' => $request->one_thousand,
+                'five_hundred_bills' => $request->five_hundred,
+                'two_hundred_bills' => $request->two_hundred,
+                'one_hundred_bills' => $request->one_hundred,
+                'fifty_bills' => $request->fifty,
+                'twenty_bills' => $request->twenty,
+                'ten_coins' => $request->ten,
+                'five_coins' => $request->five,
+                'two_coins' => $request->two,
+                'one_coins' => $request->one,
+                'coins' => $request->cents,
             ]);
 
+        }elseif($request->type == 'card'){
+
+            $withdraw = Withdraw::create([
+                'session' => Configuration::first()->current_session,
+                'amount' => $cardTotal,
+                'type' => $request->type,
+                'user_id' => auth()->user()->username,
+                'supervisor_id' => $request->username,
+                'user_fullname' => auth()->user()->name,
+                'supervisor_fullname' => $supervisor->name,
+            ]);
         }else{
             $withdraw = Withdraw::create([
                 'session' => Configuration::first()->current_session,
@@ -83,6 +105,10 @@ class WithdrawsController extends Controller
 
         if ($request->type == 'audit') {
             return redirect()->route('print.audit', $withdraw->id);
+        }
+
+        if ($request->type == 'card') {
+            return redirect()->route('print.card-audit', $withdraw->id);
         }
 
         return redirect()->route('print.withdraw', $withdraw->id);
@@ -120,7 +146,7 @@ class WithdrawsController extends Controller
 
         $cashInRegister = $salesTotal - $cardTotal - $dollarConvertedTotal - $withdrawnCash;
 
-        $amount = $request->one_thousand * 1000 + $request->five_hundred * 500 + $request->two_hundred * 200 + $request->one_hundred *100 + $request->fifty * 50 + $request->twenty * 20 + $request->ten * 10 + $request->five * 5 + $request->two * 2 + $request->one + $request->cents/2;
+        $amount = $request->one_thousand * 1000 + $request->five_hundred * 500 + $request->two_hundred * 200 + $request->one_hundred *100 + $request->fifty * 50 + $request->twenty * 20 + $request->ten * 10 + $request->five * 5 + $request->two * 2 + $request->one + $request->cents;
 
         $withdraw = Withdraw::create([
             'session' => Configuration::first()->current_session,
@@ -133,6 +159,17 @@ class WithdrawsController extends Controller
             'dollars' => $request->dollar,
             'cash_in_register' => $cashInRegister,
             'dollars_in_register' => $dollarInRegister,
+            'one_thousand_bills' => $request->one_thousand,
+            'five_hundred_bills' => $request->five_hundred,
+            'two_hundred_bills' => $request->two_hundred,
+            'one_hundred_bills' => $request->one_hundred,
+            'fifty_bills' => $request->fifty,
+            'twenty_bills' => $request->twenty,
+            'ten_coins' => $request->ten,
+            'five_coins' => $request->five,
+            'two_coins' => $request->two,
+            'one_coins' => $request->one,
+            'coins' => $request->cents,
         ]);
 
         $cashier = User::where('username', auth()->user()->username)->first();
@@ -154,6 +191,13 @@ class WithdrawsController extends Controller
         $withdraw = Withdraw::find($id);
         return view('supervisor.cashier.print-audit', ['withdraw' => $withdraw]);
     }
+
+    public function printCardAudit($id)
+    {
+        $withdraw = Withdraw::find($id);
+        return view('supervisor.cashier.print-card-audit', ['withdraw' => $withdraw]);
+    }
+
 
     public function printFinal($id)
     {

@@ -66,10 +66,10 @@ class AdminsController extends Controller
         $sessionSalesTotal = Sale::where('session', Configuration::all()->first()->current_session)->pluck('amount')->sum();
         $sessionSalesCount = Sale::where('session', Configuration::all()->first()->current_session)->count();
 
-        $sessionGenderMale = Sale::where('session', Configuration::all()->first()->current_session)->pluck('gender_male')->sum();
-        $sessionGenderFemale = Sale::where('session', Configuration::all()->first()->current_session)->pluck('gender_female')->sum();
-        $totalGenderMale = Sale::pluck('gender_male')->sum();
-        $totalGenderFemale = Sale::pluck('gender_female')->sum();
+        $sessionGenderMale = Sale::where('session', Configuration::all()->first()->current_session)->where('gender_male', '!=', '')->pluck('gender_male')->sum();
+        $sessionGenderFemale = Sale::where('session', Configuration::all()->first()->current_session)->where('gender_female', '!=', '')->pluck('gender_female')->sum();
+        $totalGenderMale = Sale::where('gender_male', '!=', '')->pluck('gender_male')->sum();
+        $totalGenderFemale = Sale::where('gender_female', '!=', '')->pluck('gender_female')->sum();
 
         return view('admin.monitoring', ['sales' => $sales, 'salesCount' => $salesCount, 'salesTotal' => $salesTotal, 'sessionSalesTotal' => $sessionSalesTotal, 'sessionSalesCount' => $sessionSalesCount, 'sessionGenderMale' => $sessionGenderMale, 'sessionGenderFemale' => $sessionGenderFemale, 'totalGenderMale' => $totalGenderMale, 'totalGenderFemale' => $totalGenderFemale]);
     }

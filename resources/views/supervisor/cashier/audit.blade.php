@@ -158,15 +158,15 @@
                         class="col-start-2 col-end-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
 
-                    <label for="cents" class="mt-3 col-start-1 col-end-2 block text-base font-medium text-[#07074D]">
-                        $0.50 Centavos
+                    <label for="cents" class="mt-3 col-start-1 col-end-2 block text-sm font-medium text-[#07074D]">
+                        Cancelaciones
                     </label>
                     <input
                         
                         type="number"
                         name="cents"
                         id="cents"
-                        placeholder="Ingrese la cantidad de monedas de $ 0.50 centavos"
+                        placeholder="Ingrese la cantidad total de cancelaciones"
                         
                         value="{{ old('cents') }}"
                         class="col-start-2 col-end-7 rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"

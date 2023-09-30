@@ -68,6 +68,10 @@ Route::get('/cashier/supervisor/cash-withdraw', [CashiersController::class, 'wit
 Route::post('/cashier/supervisor/cash-withdraw', [WithdrawsController::class, 'store'])->name('withdraw.store')->middleware('role:cashier');
 Route::get('/cashier/supervisor/dollar-withdraw', [CashiersController::class, 'withdrawDollarView'])->name('supervisor.cashier.withdraw.dollar')->middleware('role:cashier');
 Route::post('/cashier/supervisor/dollar-withdraw', [WithdrawsController::class, 'store'])->name('withdraw.store')->middleware('role:cashier');
+
+Route::get('/cashier/supervisor/card-audit', [CashiersController::class, 'cardAuditView'])->name('supervisor.cashier.card-audit')->middleware('role:cashier');
+Route::post('/cashier/supervisor/card-audit', [WithdrawsController::class, 'store'])->name('withdraw.store')->middleware('role:cashier');
+
 Route::get('/cashier/supervisor/audit', [CashiersController::class, 'auditView'])->name('supervisor.cashier.audit')->middleware('role:cashier');
 Route::post('/cashier/supervisor/audit', [WithdrawsController::class, 'store'])->name('withdraw.store')->middleware('role:cashier');
 Route::get('/cashier/supervisor/final-cut', [CashiersController::class, 'finalView'])->name('supervisor.cashier.final-cut')->middleware('role:cashier');
@@ -75,6 +79,7 @@ Route::post('/cashier/supervisor/final-cut', [WithdrawsController::class, 'final
 
 Route::get('/cashier/supervisor/print/{id}', [WithdrawsController::class, 'print'])->name('print.withdraw');
 Route::get('/cashier/supervisor/print-audit/{id}', [WithdrawsController::class, 'printAudit'])->name('print.audit');
+Route::get('/cashier/supervisor/print-card-audit/{id}', [WithdrawsController::class, 'printCardAudit'])->name('print.card-audit');
 Route::get('/cashier/supervisor/print-final/{id}', [WithdrawsController::class, 'printfinal'])->name('print.final');
 Route::get('/cashier/supervisor/withdraw-success', fn() => view('supervisor.cashier.success') )->name('withdraw.success')->middleware('role:cashier');
 

@@ -44,13 +44,15 @@
                                         Efectivo
                                     @elseif($withdraw->type == 'dollar')
                                         Dolares
+                                    @elseif($withdraw->type == 'card')
+                                        Reporte Tarjeta
                                     @else
                                         Arqueo
                                     @endif
                                 </div>
                             </td>
                             <td class="p-2 whitespace-nowrap">
-                                @if ($withdraw->type == 'audit' || $withdraw->type == 'final')
+                                @if ($withdraw->type == 'audit' || $withdraw->type == 'final' || 'card')
                                 <div class="text-lg text-green-700 font-bold">    
                                     $ {{ number_format($withdraw->amount, '2') }}
                                 </div>
@@ -78,6 +80,9 @@
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="p-2 whitespace-nowrap">
+                            <div class="font-semibold text-left">Folio</div>
+                        </th>
+                        <th class="p-2 whitespace-nowrap">
                             <div class="font-semibold text-left">Descripción</div>
                         </th>
                         <th class="p-2 whitespace-nowrap">
@@ -91,6 +96,9 @@
                 <tbody class="text-sm divide-y divide-gray-100">
                     @foreach ($sales as $sale)
                         <tr>
+                            <td class="p-2 whitespace-nowrap">
+                                {{ $sale->id }}
+                            </td>
                             <td class="p-2 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="text-lg font-medium text-gray-800">

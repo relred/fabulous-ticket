@@ -21,15 +21,65 @@
                 <img src="{{ asset('assets/logo-print.png') }}" alt="">
             </div>
 
-            <div class="mt-16">
-                <h2 class="my-3 text-2xl font-semibold text-gray-900 text-center" style="font-size: 2em;">Fiestas del Sol</h2>
-                <div class="scale-100 flex my-4">
+            <div>
+                <div class="scale-100 flex my-3">
                     <div>
-                        <p class="mb-6 font-bold text-xl text-center">Corte Final</p>
-                        <p class="mb-2 font-bold">Folio de retiro: {{ $withdraw->id }}</p>
+                        <p class="mb-3 font-bold text-xl text-center">Corte Final</p>
+                        <p class="mb-1 font-bold">Folio de retiro: {{ $withdraw->id }}</p>
                         <p>Cajero: {{ $withdraw->user_fullname }}</p>
                         <p>Supervisor: {{ $withdraw->supervisor_fullname }}</p>
-                        <br>
+                        <p>---------------------------------</p>
+                        <p class="text-center font-bold">Billetes</p>
+                        <table class="min-w-full border-black border-solid border-2">
+                            <tr>
+                                <td class="border-black border-solid border-2">$1,000</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->one_thousand_bills }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$500</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->five_hundred_bills }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$200</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->two_hundred_bills }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$100</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->one_hundred_bills }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$50</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->fifty_bills }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$20</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->twenty_bills }}</td>
+                            </tr>
+
+                        </table>
+
+                        <p class="text-center font-bold mt-4">Monedas</p>
+                        <table class="min-w-full border-black border-solid border-2">
+                            <tr>
+                                <td class="border-black border-solid border-2">$10</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->ten_coins }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$5</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->five_coins }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$2</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->two_coins }}</td>
+                            </tr>
+                            <tr>
+                                <td class="border-black border-solid border-2">$1</td>
+                                <td class="border-black border-solid border-2">-- {{ $withdraw->one_coins }}</td>
+                            </tr>
+                        </table>
+                        <p class="mt-1 text-center font-bold">Cancelaciones: $ {{ $withdraw->coins }}</p>
+                        <p>---------------------------------</p>
+
                         <p class="text-center">Efectivo en caja:</p>
                         <p class="text-center text-lg font-bold">
                             $ {{ number_format($withdraw->amount, 2) }}

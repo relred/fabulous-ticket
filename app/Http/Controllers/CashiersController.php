@@ -71,9 +71,6 @@ class CashiersController extends Controller
 
     public function generateSession(Request $request)
     {
-        $request->validate([
-            'cash' => 'required|numeric',
-        ]);
 
         if ($userInStall = User::where('stall', $request->stall)->first()){
             return back()->with('stallError', 'Esta caja ya está en uso por '. $userInStall->name)->withInput();
@@ -96,15 +93,6 @@ class CashiersController extends Controller
         $user->stall = $request->stall;
         $user->session = $configuration->current_session;
         $user->save();
-
-        Sale::create([
-            'description' => 'Ingreso de fondo de caja',
-            'user_id' => auth()->user()->id,
-            'cluster_id' => uniqid(),
-            'amount' => $request->cash,
-            'amount_cash' => $request->cash,
-            'session' => $configuration->current_session,
-        ]);
 
         return redirect()->route('dashboard');
     }
@@ -149,7 +137,7 @@ class CashiersController extends Controller
         $dollarTotal = $salesraw->pluck('amount_dollar')->sum();
         $dollarInRegister = $dollarTotal - $withdrawnDollars;
 
-        return view('supervisor.cashier.index', ['withdrawHistory'=> $withdrawHistory, 'cashInRegister' => $cashInRegister, 'salesTotal' => $salesTotal, 'dollarTotal' => $dollarInRegister]);
+        return view('supervisor.cashier.index', ['withdrawHistory'=> $withdrawHistory, 'cashInRegister' => $cashInRegister, 'salesTotal' => $salesTotal, 'dollarTotal' => $dollarInRegister, 'cardTotal' => $cardTotal]);
     }
 
     public function withdrawCashView()
@@ -165,6 +153,11 @@ class CashiersController extends Controller
     public function auditView()
     {
         return view('supervisor.cashier.audit');
+    }
+
+    public function cardAuditView()
+    {
+        return view('supervisor.cashier.card-audit');
     }
 
     public function finalView()
