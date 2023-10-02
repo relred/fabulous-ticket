@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Sale;
+use App\Models\Configuration;
 
 use App\Http\Controllers\SalesController;
 
@@ -55,7 +56,7 @@ class PointOfSale extends Component
         $this->ticketsTotal = (int)$this->adult + (int)$this->kid + (int)$this->senior + (int)$this->disabled;
         $this->genderTotal = (int)$this->genderMale + (int)$this->genderFemale;
 
-        $this->adultTotal = (int)$this->adult * 50;
+        $this->adultTotal = (int)$this->adult * configuration::first()->dollar_price;
         $this->kidTotal = (int)$this->kid * 0;
         $this->seniorTotal = (int)$this->senior * 0;
         $this->disabledTotal = (int)$this->disabled * 0;
@@ -87,7 +88,7 @@ class PointOfSale extends Component
             }
         }
 
-        if ($this->total) {
+        if ($this->adult || $this->kid || $this->senior || $this->disabled) {
             if ($this->genderTotal == $this->ticketsTotal) {
                 $this->step = 3;
             }else{
