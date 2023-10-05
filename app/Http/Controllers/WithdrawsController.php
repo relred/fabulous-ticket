@@ -189,7 +189,18 @@ class WithdrawsController extends Controller
     public function printAudit($id)
     {
         $withdraw = Withdraw::find($id);
-        return view('supervisor.cashier.print-audit', ['withdraw' => $withdraw]);
+
+        $salesraw = Sale::where('user_id', auth()->user()->id)->where('session', $withdraw->session);
+        $totalSale = $salesraw->pluck('amount')->sum();
+        $totalCard = $salesraw->pluck('amount_card')->sum();
+        $totalDollar = Sale::where('user_id', auth()->user()->id)->where('session', $withdraw->session)->pluck('amount_dollar')->sum();
+
+        $dollarConvertedTotal = $totalDollar * 16;
+
+        $totalCash = $totalSale - $totalCard - $dollarConvertedTotal;
+
+
+        return view('supervisor.cashier.print-audit', ['withdraw' => $withdraw ,'totalSale' => $totalSale, 'totalCash' => $totalCash, 'totalCard' => $totalCard, 'totalDollar' => $totalDollar]);
     }
 
     public function printCardAudit($id)

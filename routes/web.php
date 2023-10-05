@@ -36,6 +36,11 @@ Route::get('/', function () {
         if (auth()->user()->role == 'cashier') {
             return redirect()->route('dashboard');
         }
+
+        if (auth()->user()->role == 'monitor') {
+            return redirect()->route('monitor');
+        }
+
     }
 
     return view('welcome');
@@ -47,6 +52,7 @@ Route::post('/scanner/{id}', [ScannerController::class, 'scan'])->name('scanner'
 Route::get('/emergency-scanner/{id}', [ScannerController::class, 'viewEmergency'])->name('scanner.emergency');
 Route::post('/emergency-scanner/{id}', [ScannerController::class, 'scanEmergency'])->name('scanner.emergency');
 
+Route::get('/monitor', [AdminsController::class, 'monitoring'])->name('monitor')->middleware('role:monitor');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

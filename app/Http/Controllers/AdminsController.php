@@ -44,7 +44,7 @@ class AdminsController extends Controller
             return back()->with('passwordError', 'Las contraseñas no coinciden')->withInput();
             
         }else{
-            $roleName = ($request->role == 1) ? 'supervisor' : 'admin';
+            $roleName = $request->role;
 
              User::create([
                 'name' => $request->name,
@@ -66,12 +66,17 @@ class AdminsController extends Controller
         $sessionSalesTotal = Sale::where('session', Configuration::all()->first()->current_session)->pluck('amount')->sum();
         $sessionSalesCount = Sale::where('session', Configuration::all()->first()->current_session)->count();
 
+        $sessionAdult = Sale::where('session', Configuration::all()->first()->current_session)->where('adult', '!=', '')->pluck('adult')->sum();
+        $sessionKid = Sale::where('session', Configuration::all()->first()->current_session)->where('kid', '!=', '')->pluck('kid')->sum();
+        $sessionSenior = Sale::where('session', Configuration::all()->first()->current_session)->where('senior', '!=', '')->pluck('senior')->sum();
+        $sessionDisabled = Sale::where('session', Configuration::all()->first()->current_session)->where('disabled', '!=', '')->pluck('disabled')->sum();
+
         $sessionGenderMale = Sale::where('session', Configuration::all()->first()->current_session)->where('gender_male', '!=', '')->pluck('gender_male')->sum();
         $sessionGenderFemale = Sale::where('session', Configuration::all()->first()->current_session)->where('gender_female', '!=', '')->pluck('gender_female')->sum();
         $totalGenderMale = Sale::where('gender_male', '!=', '')->pluck('gender_male')->sum();
         $totalGenderFemale = Sale::where('gender_female', '!=', '')->pluck('gender_female')->sum();
 
-        return view('admin.monitoring', ['sales' => $sales, 'salesCount' => $salesCount, 'salesTotal' => $salesTotal, 'sessionSalesTotal' => $sessionSalesTotal, 'sessionSalesCount' => $sessionSalesCount, 'sessionGenderMale' => $sessionGenderMale, 'sessionGenderFemale' => $sessionGenderFemale, 'totalGenderMale' => $totalGenderMale, 'totalGenderFemale' => $totalGenderFemale]);
+        return view('admin.monitoring', ['sales' => $sales, 'salesCount' => $salesCount, 'salesTotal' => $salesTotal, 'sessionSalesTotal' => $sessionSalesTotal, 'sessionSalesCount' => $sessionSalesCount, 'sessionGenderMale' => $sessionGenderMale, 'sessionGenderFemale' => $sessionGenderFemale, 'totalGenderMale' => $totalGenderMale, 'totalGenderFemale' => $totalGenderFemale, 'sessionAdult' => $sessionAdult, 'sessionKid' => $sessionKid, 'sessionSenior' => $sessionSenior, 'sessionDisabled' => $sessionDisabled]);
     }
 
     public function sessionView()

@@ -79,19 +79,26 @@
                         </table>
                         <p class="mt-1 text-center font-bold">Cancelaciones: $ {{ $withdraw->coins }}</p>
                         <p>---------------------------------</p>
+
                         <p class="text-center">Efectivo contado:</p>
                         <p class="text-center text-lg font-bold">
-                            $ {{ number_format($withdraw->amount, 2) }}
+                            $ {{ number_format($withdraw->amount - $withdraw->coins, 2) }}
                         </p>
 
-                        <p class="text-center">Efectivo esperado:</p>
+                        <p class="text-center">Cancelaciones ingresadas:</p>
+                        <p class="text-center text-lg font-bold">
+                            $ {{ number_format($withdraw->coins, 2) }}
+                        </p>
+
+                        <p class="text-center">Efectivo + Vales esperado:</p>
                         <p class="text-center text-lg font-bold">
                             $ {{ number_format($withdraw->cash_in_register, 2) }}
                         </p>
+
                         @if ($withdraw->amount <= $withdraw->cash_in_register)
-                            <p class="text-center">Faltante:</p>                            
+                            <p class="text-center font-bold text-lg">Faltante:</p>                            
                         @else
-                            <p class="text-center">Sobrante:</p>
+                            <p class="text-center font-bold text-lg">Sobrante:</p>
                         @endif
                         <p class="text-center text-lg font-bold">
                             $ {{ number_format($withdraw->amount - $withdraw->cash_in_register, 2) }}
@@ -100,23 +107,42 @@
 
                         <p class="text-center">Dolares contados:</p>
                         <p class="text-center text-lg font-bold">
-                            $ {{ number_format($withdraw->dollars, 2) }}
+                           US $ {{ number_format($withdraw->dollars, 2) }} <br> (MX$ {{ number_format($withdraw->dollars * 16, 2) }})
                         </p>
 
                         <p class="text-center">Dolares esperados:</p>
                         <p class="text-center text-lg font-bold">
-                            $ {{ number_format($withdraw->dollars_in_register, 2) }}
+                           US $ {{ number_format($withdraw->dollars_in_register, 2) }} <br> (MX$ {{ number_format($withdraw->dollars_in_register * 16, 2) }})
                         </p>
 
                         @if ($withdraw->dollars <= $withdraw->dollars_in_register)
-                            <p class="text-center">Faltante:</p>                            
+                            <p class="text-center font-bold text-lg">Faltante:</p>                            
                         @else
-                            <p class="text-center">Sobrante:</p>
+                            <p class="text-center font-bold text-lg">Sobrante:</p>
                         @endif
                         <p class="text-center text-lg font-bold">
-                            $ {{ number_format($withdraw->dollars - $withdraw->dollars_in_register, 2) }}
+                           US $ {{ number_format($withdraw->dollars - $withdraw->dollars_in_register, 2) }} <br> (MX$ {{ number_format(($withdraw->dollars - $withdraw->dollars_in_register) * 16, 2) }})
                         </p>
 
+                        <p>-----------------------------------</p>
+                            <p class="mb-6 font-bold text-lg text-center">Ventas Totales</p>
+                            <p class="text-center">Venta total:</p>
+                            <p class="text-center text-lg font-bold">
+                                $ {{ number_format($totalSale, 2) }}
+                            </p>
+                            <p class="text-center">Venta total efectivo:</p>
+                            <p class="text-center text-lg font-bold">
+                                $ {{ number_format($totalCash, 2) }}
+                            </p>
+                            <p class="text-center">Venta total tarjeta:</p>
+                            <p class="text-center text-lg font-bold">
+                                $ {{ number_format($totalCard, 2) }}
+                            </p>
+                            <p class="text-center">Venta total dólares:</p>
+                            <p class="text-center text-lg font-bold">
+                                US $ {{ number_format($totalDollar, 2) }} <br> (MX$ {{ number_format($totalDollar * 16, 2) }})
+                            </p>
+                        <p>-----------------------------------</p>
                         <br>
                         <p class="mb-7 text-center">
                             Fecha y hora: <br> {{ $withdraw->created_at }}

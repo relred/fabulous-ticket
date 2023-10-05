@@ -85,15 +85,19 @@
 
               </div>
 
-              <div class="grid grid-cols-2 gap-2 rounded-xl bg-gray-200 p-2 mb-5">
+              <div class="grid grid-cols-3 gap-2 rounded-xl bg-gray-200 p-2 mb-5">
                 <div>
-                    <input type="radio" name="role" id="1" value="1" class="peer hidden" checked />
+                    <input type="radio" name="role" id="1" value="supervisor" class="peer hidden" checked />
                     <label for="1" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white">Supervisor</label>
                 </div>
         
                 <div>
-                    <input type="radio" name="role" id="2" value="2" class="peer hidden" />
+                    <input type="radio" name="role" id="2" value="admin" class="peer hidden" />
                     <label for="2" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white">Administrador</label>
+                </div>
+                <div>
+                    <input type="radio" name="role" id="3" value="monitor" class="peer hidden" />
+                    <label for="3" class="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-red-500 peer-checked:font-bold peer-checked:text-white">Monitor</label>
                 </div>
               </div>
               <div>
