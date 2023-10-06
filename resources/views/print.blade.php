@@ -25,7 +25,7 @@
             </div>
 
             <div class="mt-16">
-                <img src="{{ 'https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=' . $sale->cluster_id }}" alt="">
+                <img class="w-2/5 m-auto" src="{{ 'https://api.qrserver.com/v1/create-qr-code/?size=350x350&data=' . $sale->cluster_id }}" alt="">
                 <h2 class="my-6 text-2xl font-semibold text-gray-900 text-center" style="font-size: 2em;">Fiestas del Sol</h2>
                 <hr class="mb-1">
                 <div class="scale-100 flex my-6">
